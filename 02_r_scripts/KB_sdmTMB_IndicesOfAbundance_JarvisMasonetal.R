@@ -1,5 +1,6 @@
-# Jarvis Mason, ET
-# 25 OCT 2024
+# JarvisMason et al.
+# Generate standardized index of larval abundance for Kelp Bass
+# 2024
 
 
 # load libraries ----------------------------------------------------------
