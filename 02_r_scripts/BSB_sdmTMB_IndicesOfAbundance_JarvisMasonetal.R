@@ -1,5 +1,6 @@
-# Jarvis Mason, ET
-# 25 OCT 2024
+# JarvisMason et al.
+# Generate standardized indices of abundance using sdmTMB
+# 2024
 
 
 # load libraries ----------------------------------------------------------
@@ -152,7 +153,7 @@ bspde <- add_barrier_mesh(
 
 # 03 fit models having different fixed effects ----------------------------------------
 # NOTE: use reml = FALSE (here, AIC based on fixed effects, random effects must stay the same across model comparisons)
-# spatiotemporal and Tespatial random effects on
+# spatiotemporal and spatial random effects on
 
 
 # test the effect of distance to shore, call it m1a
