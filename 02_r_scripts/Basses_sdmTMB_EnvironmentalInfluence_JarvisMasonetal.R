@@ -1,5 +1,6 @@
-# ET Mason
-# 29 OCT 2023
+# JarvisMason et al.
+# Evaluate the environmental covariate effects on saltwater bass larval densities using sdmTMB
+# 2024
 
 # load libraries ----------------------------------------------------------
 
