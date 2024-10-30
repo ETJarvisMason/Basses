@@ -1,5 +1,6 @@
-# Jarvis Mason, ET
-# 29 OCT 2024
+# JarvisMason et al.
+# Test standardized indices of abundance of saltwater bass larvae as predictors of spawning stock biomass or fishery recruitment
+# 2024
 
 
 
