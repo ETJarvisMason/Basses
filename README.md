@@ -23,7 +23,7 @@ citation:
    - Calculate spatial predictions
    - Plot predicted larval densities through time and space
    - Calculate a center of gravity (COG) through time
-   - Contains script for Figures 2, 3, and 5 (relies on loading Kelp Bass results from "01_tidy_data/" but can also be generated with KB_sdmTMB_IndicesOfAbundance_Masonetal.R, , as well as Supplemental Figure S8, S9 (map of spatiotemporal random effects), and S11 (temporal trends of standardized index of abundance containing estimates for years with no July survey)  
+   - Contains script for Figures 2, 3, and 5 (relies on loading Kelp Bass results from "01_tidy_data/" but can also be generated with KB_sdmTMB_IndicesOfAbundance_Masonetal.R), as well as Supplemental Figures S8, S9 (map of spatiotemporal random effects), and S11 (temporal trends of standardized index of abundance containing estimates for years with no July survey)  
 
 2. KB_sdmTMB_IndicesOfAbundance_Masonetal.R (sdmTMB model to generate standardized indices of larval abundance for Kelp Bass) Includes the following sections:
    - Define a geostatistical mesh
