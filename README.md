@@ -17,13 +17,13 @@ citation:
 1. BSB_sdmTMB_IndicesOfAbundance_Masonetal.R (sdmTMB model to generate standardized indices of larval abundance for Barred Sand Bass) Includes the following sections:
    - Define a geostatistical mesh
    - Test models accounting for various factors that can affect catchability, but not abundance
-   - Check model parsimony (AIC) and predictive power (5-fold cross validation)
+   - Check model parsimony (AIC) and predictive power (8-fold cross validation)
    - Create a grid for making predictions
    - Calculate index of abundance (with and without years with no July survey)
-   - Calculate spatial predictions
+   - Calculate predictions for plotting spatial distribution of larval densities
    - Plot predicted larval densities through time and space
    - Calculate a center of gravity (COG) through time
-   - Contains script for Figures 2, 3, and 5 (relies on loading Kelp Bass results from "01_tidy_data/" but can also be generated with KB_sdmTMB_IndicesOfAbundance_Masonetal.R), as well as Supplemental Figures S8, S9 (map of spatiotemporal random effects), and S11 (temporal trends of standardized index of abundance containing estimates for years with no July survey)  
+   - Contains script for Figures 2, 3, and 5 (relies on loading Kelp Bass results from "01_tidy_data/" once generated with KB_sdmTMB_IndicesOfAbundance_Masonetal.R), as well as Supplemental Figures S8, S9 (map of spatiotemporal random effects), and S11A (temporal trends of standardized index of abundance containing estimates for years with no July survey)  
 
 2. KB_sdmTMB_IndicesOfAbundance_Masonetal.R (sdmTMB model to generate standardized indices of larval abundance for Kelp Bass) Includes the following sections:
    - Define a geostatistical mesh
@@ -31,10 +31,10 @@ citation:
    - Check model parsimony and predictive power
    - Create a grid for making predictions
    - Calculate index of abundance (with and without years with no July survey)
-   - Calculate spatial predictions
+   - Calculate predictions for plotting spatial distribution of larval densities
    - Plot predicted larval densities through time and space
    - Calculate a center of gravity (COG) through time
-   - Contains script for Figures 2C,D, 4, 5C,D, and Supplemental Figures S9 (map of spatiotemporal random effects) and S11B (temporal trends of standardized index of abundance containing estimates for years with no July survey)  
+   - Contains script for Figures 2C,D, 4, 5C,D, and Supplemental Figures S10 (map of spatiotemporal random effects) and S11B (temporal trends of standardized index of abundance containing estimates for years with no July survey)  
 
 3. CrossCorrelation_Masonetal.R (runs cross-correlation analyses between the larval indices of abundance generated above and 2 different sources of catch data (total catch estimates from all fishing modes and harvested catch reported on CPFV logbooks)
    - Cross-correlation for Barred Sand Bass
@@ -43,9 +43,9 @@ citation:
   
 4. Basses_sdmTMB_EnvironmentalInfluence_Masonetal.R (sdmTMB model to test the effects of a variety of environmental covariates on each species larval density)
    - Test a suite of environmental covariates over the entire study period (1963-2016) - For Barred Sand Bass and for Kelp Bass
-   - Check model parsimony (AIC) and predictive power (5-fold cross validation) for Time Period 1 - For Barred Sand Bass and for Kelp Bass
+   - Check model parsimony (AIC) and predictive power (8-fold cross validation) for Time Period 1 - For Barred Sand Bass and for Kelp Bass
    - Test the same suite of environmental covariates, adding two more, over a shorter time period (1984-2016) - For Barred Sand Bass and for Kelp Bass
-   - Check model parsimony (AIC) and predictive power (5-fold cross validation) for Time Period 2 - For Barred Sand Bass and for Kelp Bass
+   - Check model parsimony (AIC) and predictive power (8-fold cross validation) for Time Period 2 - For Barred Sand Bass and for Kelp Bass
    - Compare covariate effects across species and time periods
    - Contains script for Figure 7 and for Supplemental Figures S12,13,14,15 (conditional effects plots)
 
