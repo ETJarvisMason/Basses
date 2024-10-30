@@ -47,7 +47,7 @@ check_mods <- function(sp, sptmp, y, covar, time, mesh, dataset, xt, tv, reml) {
   AIC <- AIC(fit)
   tidy <- tidy(fit,"ran_pars",conf.int = TRUE)
   
-  print(list(fit,which(san==FALSE),AIC,tidy))
+  print(list(fit,san,AIC,tidy))
 }
 
 ## function to create pub quality figs
@@ -161,7 +161,7 @@ bspde <- add_barrier_mesh(
 
 names(bsb)
 
-# extra time argument (no data these years)
+# extra time argument (no July cruise these years)
 xt <- c(1967, 1968, 1970, 1971, 1973, 1974, 1976, 1977,
         1979, 1980, 1982, 1985, 1986, 1987, 1988, 1990, 1991, 1993, 1994,
         1996, 1999, 2008, 2010, 2011)
@@ -477,7 +477,7 @@ ggplot() +
 
 df <- left_join(grid,points_sf_dist)
 
-# now expand our data frame to include all time variables and any covariates in our model (year, distance, moon phase, and
+# now expand our data frame to include all time variables and any covariates in our model (year, distance to mainland, and
 # lat/lon in kilometers) - this is a necessary step for prediction
 
 # replication factor  
@@ -501,13 +501,13 @@ sd.dist <- sd(bsb$dist_km_calc)
 new_df <- new_df %>% 
   dplyr::filter(dist > 0) %>% 
   mutate(scale_dist2shore = (dist - mu.dist) / sd.dist) %>% # use same name as covariate name in model
-  filter(area.km>3.9999)
+  filter(area.km>3.9999) # we want 4 km sq grid cells, or one could create a vector of all of the area of all cells, but in this case, the vec was too large for making predictions 
 
 
 
 # 07 calculate index of abundance----------------------------------------------------
 
-# make predictions
+# make predictions for index (return_tmb_object = TRUE)
 pred.index = predict(fit, newdata = new_df, return_tmb_object = TRUE)
 
 # get index
@@ -515,7 +515,7 @@ index = get_index(pred.index, bias_correct = TRUE, area = 4)
 
 save(bsb,df,new_df,fit,pred.index,index, file="01_tidy_data/output_SIA_BSB.RData")
 
-## index with missing years (skip to plot index above)-----------------------------------------------------
+## index with missing years (skip this section to move on to plot index above)-----------------------------------------------------
 
 
 # replication factor  
@@ -553,7 +553,7 @@ save(bsb,df,new_df,fit,pred.index,index, file="01_tidy_data/output_SIA_BSB_with_
 
 load(file="01_tidy_data/output_SIA_BSB.RData")
 
-# load instead, to plot index with missing years # (Fig. S10)
+# load instead, to plot index with missing years (Fig. S11)
 load(file="01_tidy_data/output_SIA_BSB_with_missing_yrs.RData")
 
 
@@ -573,7 +573,7 @@ p1 <- ggplot(index, aes(year, est)) +
 p1 
 
 
-# natural log
+# natural log scale
 p2 <- ggplot(index, aes(year, log_est)) +
   geom_ribbon(aes(ymin=log_est-2*se,ymax=log_est+2*se), fill ="gray",alpha=0.6) +
   # geom_pointrange(aes(ymin=log_est-2*se,ymax=log_est+2*se)) +
@@ -599,10 +599,12 @@ BSB + p3
 
 ## Supplemental Figure S8----------------------
 
+# grab Kelp Bass index
 load(file="01_tidy_data/output_SIA_KB.RData")
 index.kb <- index %>% 
   mutate(sp = "Kelp Bass")
 
+# grab Barred Sand Bass index
 load(file="01_tidy_data/output_SIA_BSB.RData")
 index.bsb <- index%>% 
   mutate(sp = "Barred Sand Bass")
@@ -637,9 +639,10 @@ index.both %>%
 
 # 09 Figure 3 predicted density maps -------------------------------------------------------
 
+# grab Barred Sand Bass index
 load(file="01_tidy_data/output_SIA_BSB.RData")
 
-# predict on new data
+# make predictions for plotting density (return_tmb_object = FALSE)
 set.seed(011823)
 
 pred.spatial = predict(fit, newdata = new_df, return_tmb_object = FALSE)
@@ -721,10 +724,12 @@ ggplot() +
 # load data and predictions for index
 load(file="01_tidy_data/output_SIA_BSB.RData")
 
+# calculate center of gravity by year
 cog <- get_cog(pred.index, level = 0.75, format = "wide", area = 4)
 
 save(cog, file="01_tidy_data/output_COG_BSB.RData")
 
+# plot cog
 load(file="01_tidy_data/output_COG_BSB.RData")
 
 map_data <- rnaturalearth::ne_countries(
@@ -743,7 +748,6 @@ na_coast_proj <- sf::st_transform(na_coast, crs = 32611)
 
 
 # Pt. Dume shore station sst data
-# cite:"Point Dume measurements collected by the Los Angeles County Lifeguard service. Data provided by the Shore Stations Program sponsored at Scripps Institution of Oceanography by California State Parks, Division of Boating and Waterways. Contact: shorestation@ucsd.edu."
 # citation: Carter, Melissa L.; Flick, Reinhard E.; Terrill, Eric; Beckhaus, Elena C.; Martin, Kayla; Fey, Connie L.; Walker, Patricia W.; Largier, John L.; McGowan, John A. (2022). Shore Stations Program, Point Dume - Zuma Beach. In Shore Stations Program Data Archive: Current and Historical Coastal Ocean Temperature and Salinity Measurements from California Stations. UC San Diego Library Digital Collections. https://doi.org/10.6075/J00001XZ
 
 df <- read_csv("00_raw_data/Zuma_TEMP_1956-2021.csv", 
