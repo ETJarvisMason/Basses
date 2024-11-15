@@ -919,7 +919,7 @@ c2
 cogwdec %>% 
   group_by(decade) %>% 
   filter(decade == "1960s" | decade == "2010s") %>% 
-  summarise(meanNorth = median(est_y))
+  summarise(medNorth = median(est_y))
 
 ggplot(data=subset(cogwdec, decade %in% "1960s" | decade %in% "2010s"),aes(decade,est_y))+
   geom_boxplot(outlier.shape = NA, draw_quantiles = c(0.25, 0.5, 0.75))+
@@ -930,6 +930,7 @@ ggplot(data=subset(cogwdec, decade %in% "1960s" | decade %in% "2010s"),aes(decad
   #  Add p-value
   stat_compare_means(method = "wilcox", size=8)
 
+# two different functions to generate difference in medians using Wilcox text 
 compare_means(est_y ~ decade, subset(cogwdec, decade %in% "1960s" | decade %in% "2010s"), method = "wilcox.test")
 wilcox.test(est_y ~ decade, subset(cogwdec, decade %in% "1960s" | decade %in% "2010s"))
 
