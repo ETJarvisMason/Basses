@@ -601,7 +601,7 @@ BSB + p3
 ## Supplemental Figure S8----------------------
 
 # grab Kelp Bass index
-load(file="01_tidy_data/output_SIA_KB.RData")
+load(file="01_tidy_data/output_SIA_KB.RData")  # this file can be recreated using KB_sdmTMB_IndicesOfAbundance_JarvisMasonetal.R 
 index.kb <- index %>% 
   mutate(sp = "Kelp Bass")
 
